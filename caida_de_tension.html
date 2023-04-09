@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caída de Tensión</title>
+    <link rel="stylesheet" href="./estilos-post.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <header>
+        <h1 class="titulo-pagina">Caída de tensión</h1>
+        <nav>
+            <ul class="nav">
+                <li>
+                    <a href="#caida-form">Ir al formulario</a>
+                </li>
+                <li>
+                    <a href="./index.html">Inicio</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <p>La caída de tensión es un efecto eléctrico en el cual la tensión de la fuente no llega por completo a la carga
+        debido a la distancia que los separa o al tamaño inapropiado del conductor que los conecta.</p>
+        <p>Sea el siguiente circuito trifásico en el cual la resistencia de los conductores <b>no</b> es despreciable</p>
+        <figure class="contenedor-imagen">
+            <img src="./pictures/caida de tension 3F.png" alt="Circuito trifásico">
+        </figure>
+        <p>La caída de voltaje en la fase <i>a</i> será</p>
+        \[ V_R = I_a R = V_{an} - V_{AN} \]
+        <p>Si multiplicamos la ecuación por \(\sqrt{3}\) obtenemos los voltajes de línea</p>
+        \begin{eqnarray*}
+            \sqrt{3}V_R & = & \sqrt{3}I_aR = \sqrt{3}V_{an} - \sqrt{3}V_{AN} \\
+            E_c & = & \sqrt{3}I_aR = V_l - V_L
+        \end{eqnarray*}
+        <p>\(E_c\) es justamente lo que estamos buscando pues es la diferencia entre el voltaje de línea de la fuente
+        y el voltaje de línea de la carga.</p>
+        <p>La caída de tensión en porcentaje (\(E\%\)) está dada por</p>
+        \[ E\% = \frac{E_c}{V_l}\times 100 \]
+        <p>Se puede calcular la resistencia de los conductores (\(R\)) en función de \(E_c\) como</p>
+        \[ E_c = \sqrt{3}I_aR \quad\longrightarrow\quad R = \frac{E_c}{\sqrt{3}I_a} \]
+        <p>También podemos calcular la resistencia mediante la resistividad del conductor y sus medidas físicas</p>
+        \[ R = \frac{\rho l}{S} \]
+        <p>donde:</p>
+        \begin{align*}
+            \rho: &\textrm{ conductividad eléctrica del material} \\
+            l: &\textrm{ longitud del conductor} \\
+            S: &\textrm{  área de la sección transversal del conductor}
+        \end{align*}
+        <p>Al igualar estas dos últimas ecuaciones y despejar \(S\), podemos calcular el área de conductor requerida para
+        para cumplir con un porcentaje de caída de tensión dado</p>
+        \begin{align*}
+            \frac{\rho l}{S} &= \frac{E_c}{\sqrt{3}I_a} \\
+            S &= \frac{\sqrt{3}\cdot 100\cdot \rho\cdot l\cdot I_a}{E\%\cdot V_l}
+        \end{align*}
+
+        <form id="caida-form">
+        <fieldset>
+            <legend>Calc. de conductores por caída de tensión</legend>
+            <span>Número de fases:</span>
+            <input type="radio" id="monofase" name="n_fases" value="1" onchange="cambioFases()">
+            <label for="monofase">1</label>
+            <input type="radio" id="bifase" name="n_fases" value="2" onchange="cambioFases()">
+            <label for="bifase">2</label>
+            <input type="radio" id="trifase" name="n_fases" value="3" checked onchange="cambioFases()">
+            <label for="trifase">3</label><br><br>
+
+            <label for="volt_linea" class="justificar_etiqueta">Voltaje de línea [V]:</label>
+            <select name="v_linea" id="volt_linea">
+                <option value="127" disabled>127</option>
+                <option value="220" selected>220</option>
+                <option value="440">440</option>
+            </select><br><br>
+
+            <label for="dist" class="justificar_etiqueta">Distancia [m]:</label>
+            <input type="number" id="dist" name="distancia" min="0" required><br><br>
+
+            <label for="intens" class="justificar_etiqueta">Corriente de línea [A]:</label>
+            <input type="number" id="intens" name="corriente" min="0" required><br><br>
+
+            <span>Conductor:</span>
+            <input type="radio" id="cobre" name="resistividad" value="0.02" checked>
+            <label for="cobre">Cobre</label>
+            <input type="radio" id="aluminio" name="resistividad" value="0.03">
+            <label for="aluminio">Aluminio</label><br><br>
+        
+            <label for="porcen" class="justificar_etiqueta">Caída de voltaje [%]:</label>
+            <input type="number" id="porcen" name="caida" min="0" max="100" value="3" required><br><br>
+
+            <label for="toler" class="justificar_etiqueta">Tolerancia de corriente [%]:</label>
+            <input type="number" id="toler" name="tolerancia" min="0" max="100" value="15" required><br><br>
+            
+            <input type="submit" value="Calcular conductor"><br><br>
+
+            <label for="corrienteT" class="justificar_etiqueta">Corriente total [A]:</label>
+            <input type="number" id="corrienteT" disabled><br><br>
+            
+            <label for="area_conductor" class="justificar_etiqueta">Área requerida [mm^2]:</label>
+            <input type="text" id="area_conductor" disabled><br><br>
+    
+            <label for="calibre_conductor" class="justificar_etiqueta">Calibre asociado [AWG]:</label>
+            <input type="text" id="calibre_conductor" disabled><br><br>
+        </fieldset>
+        </form>
+    </main>
+
+    <script src="./JS_code/caida_de_tension.js"></script>
+    <script src="./JS_code/tablas.js"></script>
+</body>
+</html>

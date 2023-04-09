@@ -1,0 +1,34 @@
+\documentclass[]{standalone}
+
+\usepackage{circuitikz}
+
+\begin{document}
+
+\begin{circuitikz}[american, style={font=\Large}]
+\ctikzset{label/align = straight}
+
+\draw
+(0,4)	to[V=$\textbf{V}_{an}$] (0,0)
+(220:4) to[V=$\textbf{V}_{cn}$] (0,0)
+(320:4) to[V_=$\textbf{V}_{bn}$] (0,0);
+
+\draw
+(0,4) to[R=$R$, i^>=$\textbf{I}_a$] ++(10,0) to[generic=$\textbf{Z}_Y$] ++(0,-4) -- (0,0)
+(220:4) -- ++(0,-3) to[R=$R$, i^>=$\textbf{I}_c$] ++(10,0) -- ++(0,3) to[generic=$\textbf{Z}_Y$] (10,0)
+%(320:4) -- ++(0,-1) to[R=$R$, i^>=$\textbf{I}_b$] ++(10,0) -| ($(10,0)+(320:4)$) to[generic, l_=$\textbf{Z}_Y$]
+(320:4) -- ++(0,-1) -- ++(3,0) to[R=$R$, i^>=$\textbf{I}_b$] ++(7,0) -- ++(0,1) to[generic, l_=$\textbf{Z}_Y$]
+ (10,0);
+
+\draw
+(0,0) node[left] {n}
+(0,4) node[left] {a}
+(220:4) node[left] {c}
+(320:4) node[right] {b}
+(10,0) node[right] {N}
+($(10,0)+(0,4)$) node[right] {A}
+($(10,0)+(220:4)$) node[left] {C}
+($(10,0)+(320:4)$) node[right] {B};
+
+\end{circuitikz}
+
+\end{document}

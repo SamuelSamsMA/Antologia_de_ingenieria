@@ -1,0 +1,31 @@
+:root {
+    --espacio-vertical: 7px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: sans-serif;
+}
+
+/* Títulos y párrafos */
+h1, h2 {
+    margin: 15px 5px;
+}
+
+p {
+    margin: var(--espacio-vertical) 5px;
+}
+
+/* Listas de enlaces de utilidad */
+.lista-enlaces {
+    padding-left: 30px;
+}
+
+.lista-enlaces li {
+    margin-top: 10px;
+}

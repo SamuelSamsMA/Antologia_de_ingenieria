@@ -1,0 +1,126 @@
+:root {
+    --espacio-vertical: 7px;
+    --nav-color: #333;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: sans-serif;
+}
+
+/* Barra de navegación superior */
+.nav {
+    list-style-type: none;
+    margin-top: 10px;
+    padding: 5px;
+    border-top: 2px solid #333;
+    border-bottom: 2px solid #333;
+}
+
+.nav li {
+    display: inline;
+}
+
+.nav a {
+    padding: 5px;
+}
+
+/* Títulos y párrafos */
+h1, h2 {
+    margin: 15px 5px;
+}
+
+p {
+    margin: var(--espacio-vertical) 5px;
+}
+
+/* Formularios */
+form {
+    width: 90%;
+    max-width: 375px;
+    margin: 10px auto;
+}
+
+form legend {
+    padding: 5px;
+    border-radius: 3px;
+    background-color: bisque;
+    border: 1px solid black;
+    margin-bottom: 10px;
+}
+
+form fieldset {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+form input[type="number"], form input[type="text"], form select {
+    width: 100px;
+    display: inline-block;
+}
+
+form input[type="submit"] {
+    display: block;
+    margin: 0px auto;
+    padding: 2px 5px;
+}
+
+form .justificar_etiqueta {
+    display: inline-block;
+    text-align: left;
+    width: calc(100% - 105px);
+}
+
+/* Listas de enlaces de utilidad */
+.lista-enlaces {
+    padding-left: 30px;
+}
+
+.lista-enlaces li {
+    margin-top: 10px;
+}
+
+/* Tablas generales */
+.tabla-general {
+    border-collapse: collapse;
+    border: 2px solid rgb(200,200,200);
+    margin: 5px;
+}
+
+.tabla-general caption {
+    padding: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.tabla-general th {
+    background-color: rgb(235,235,235);
+}
+
+.tabla-general th, .tabla-general td {
+    border: 1px solid rgb(190,190,190);
+    padding: 5px;
+    text-align: center;
+}
+
+/* Imágenes */
+.contenedor-imagen {
+    max-width: fit-content;
+    margin: var(--espacio-vertical) auto;
+}
+
+.contenedor-imagen img {
+    width: 100%;
+}
+
+@media (max-width:400px) {
+    .contenedor-imagen {
+        width: 95%;
+    }
+}
+
