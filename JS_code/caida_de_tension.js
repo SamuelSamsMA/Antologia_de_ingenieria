@@ -12,7 +12,7 @@ form_caida.addEventListener("submit", (e) => {
 
 function calc_conductor(data) {
     let {n_fases, v_linea, distancia, corriente, resistividad, caida, tolerancia} = data;
-
+    
     let constante;
     switch (Number(n_fases)) {
         case 1:
@@ -27,6 +27,9 @@ function calc_conductor(data) {
     let corriente_total = (Number(corriente) * (100 + Number(tolerancia))) / 100;
     document.getElementById("corrienteT").value = corriente_total;
 
+    let voltaje_perdido = (caida * v_linea) / 100;
+    document.getElementById("volt_caida").value = voltaje_perdido;
+
     let area_conductor = (constante * 100 * resistividad * distancia * corriente_total) / (caida * v_linea);
     document.getElementById("area_conductor").value = area_conductor;
 
@@ -36,28 +39,23 @@ function calc_conductor(data) {
 
 
 function cambioFases() {
-    let radios = document.getElementsByName("n_fases");
-    let select = document.getElementById("volt_linea");
+    const fases = document.getElementById("nfases");
+    const select = document.getElementById("volt_linea");
+    const opcion = fases.options[fases.selectedIndex];
 
-    for (let i in radios)
+    if (opcion.value == "1")
     {
-        if (radios[i].checked)
-        { // Encontró el radio seleccionado
-            if (radios[i].value == "1")
-            {
-                select.options[0].disabled = false;
-                select.options[1].disabled = true;
-                select.options[2].disabled = true;
-                select.value = "127";
-            }
-            else if (radios[i].value == "2" || radios[i].value == "3")
-            {
-                select.options[0].disabled = true;
-                select.options[1].disabled = false;
-                select.options[2].disabled = false;
-                select.value = "220";
-            }
-        }
+        select.options[0].disabled = false;
+        select.options[1].disabled = true;
+        select.options[2].disabled = true;
+        select.value = "127";
+    }
+    else if (opcion.value == "2" || opcion.value == "3")
+    {
+        select.options[0].disabled = true;
+        select.options[1].disabled = false;
+        select.options[2].disabled = false;
+        select.value = "220";
     }
 }
 

@@ -111,11 +111,19 @@ form .justificar_etiqueta {
 /* Imágenes */
 .contenedor-imagen {
     max-width: fit-content;
-    margin: var(--espacio-vertical) auto;
+    margin: 15px auto;
 }
 
 .contenedor-imagen img {
     width: 100%;
+}
+
+.contenedor-imagen figcaption {
+    font-size: 80%;
+    padding-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 12px;
+    color: gray;
 }
 
 @media (max-width:400px) {
